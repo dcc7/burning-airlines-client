@@ -15,11 +15,11 @@ function App() {
       </div>
 
       <Switch>
+        <Route path="/flight/:id">
+          <Flights />
+        </Route>
         <Route path="/search">
           <Search />
-        </Route>
-        <Route path="/flight">
-          <Flights />
         </Route>
       </Switch>
 

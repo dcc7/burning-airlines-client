@@ -10,28 +10,73 @@ class Search extends Component {
   constructor() {
     super();
     this.state = {
-      flightNumber: [],
+      flightNumber: 0,
+      rows: 0,
+      columns: 0,
+      seats: 0,
+      name: ''
     };
   }
 
-  // const SERVER_URL = '';
-  // API connection, this then updates the state?
-  // const fetchFlights = () => {
-  //   axios(SERVER_URL).then((response) => {
-  //     this.setState({flightResults: response.traversingtheJSON });
-  //   });
-  // }
+
+
+  componentDidMount(){
+    const flightNumber = window.location.href.substring(window.location.href.lastIndexOf("/")+1)
+    this.setState({flightNumber: flightNumber})
+
+    axios('https://burning-airlines-oh-no.herokuapp.com/planes.json').then((response) => {
+      const matches = [];
+      response.data.forEach(plane => {
+        if(plane.id === Number(this.state.flightNumber)) {
+          matches.push(plane)
+        }
+      })
+      this.setState({rows: matches[0].rows})
+      this.setState({columns: matches[0].cols })
+      this.setState({name: matches[0].name })
+
+      const seatCalculator = () => {
+        this.setState({seats: this.state.rows * this.state.columns});
+      };
+      seatCalculator();
+
+    })
+  };
 
 
   render() {
     return (
-      // passing down the flight data to the Searchflights child as a prop.
       <div>
         <h1>Seating</h1>
-        <Flightresults/>
+        <h4>Plane Name: { this.state.name }</h4>
+        <h1>{ this.state.seats } Seats Available</h1>
+        <SeatsMap seats={ this.state.seats }/>
       </div>
     );
   }
 }
 
 export default Search;
+
+
+// Seats map component. Placed here out of laziness.
+
+const SeatsMap = (props) => {
+  const seatArray = Array.from(Array(props.seats).keys());
+  const seats = seatArray.map((seat) => <button key={ seat }>{ seat + 1 }</button>)
+
+
+  // for (let i = 0; i <= props.columns; i++) {
+  //   for (let j = 0; j <= props.rows; j++ ) {
+  //     <button>Seat</button>
+  //   }
+  // }
+
+
+  return (
+    <div>
+      <h3>Seat Number</h3>
+      { seats }
+    </div>
+  )
+};

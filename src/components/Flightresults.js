@@ -11,8 +11,12 @@ class Flightresults extends Component {
     this.handleClick = this._handleClick.bind(this);
   }
 
+
   _handleClick = (event) => {
     this.setState({flightId: event.target.innerText})
+    // JS of going to this directory.
+    window.location.href = `/flight/${event.target.innerText}`
+    // To get the last bit of text, we can use JS in the new page, like params from rails.
   }
 
   render() {
@@ -25,7 +29,7 @@ class Flightresults extends Component {
                <td>Origin</td>
                <td>destination</td>
              </tr>
-            {this.props.flights.map((flight) => 
+            {this.props.flights.map((flight) =>
               <tr>
                <td>{flight.departure_date}</td>
                <td onClick={ this._handleClick }>{flight.id}</td>
