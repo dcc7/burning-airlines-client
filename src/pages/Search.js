@@ -25,16 +25,17 @@ class Search extends Component {
   // }
 
   // Function to take in data from the child.
-  const saveFlights = (origin, destination) => {
-    
+  saveFlights(origin, destination) {
+    console.log(origin, destination); //this somehow works now Jonny. Good luck!
+>>>>>>> 1fb29ed7803cf3ee1d848bcde310136075d5636f
   };
 
   render() {
     return (
-      // passing down the flight data to the Searchflights child.
+      // passing down the flight data to the Searchflights child as a prop.
       <div>
         <h1>Search Flights</h1>
-        <Searchflights onSubmit={ this.saveFlights } />
+        <Searchflights onSubmit={this.saveFlights} />
         <Flightresults flights={this.state.flights}/>
       </div>
     );
