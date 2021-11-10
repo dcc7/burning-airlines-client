@@ -8,7 +8,10 @@ class Searchflights extends Component {
     this.state = {
       origin: '',
       destination: ''
-     };
+    };
+    this._handleChangeOrigin = this._handleChangeOrigin.bind(this);
+    this._handleChangeDest = this._handleChangeDest.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
 
@@ -22,8 +25,10 @@ class Searchflights extends Component {
   }
 
   // handleSubmit, call the parent function and pass up the origin and destination.
-  _handleSubmit() {
-    // this.props.onSubmit(this.state.origin, this.state.destination);
+  _handleSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.state.origin, this.state.destination); //calling onSubmit in parent (Search.js) and passing two parameters.
+    this.setState({origin: '', destination: ''}) //so once the search is done the input boxes are cleared?
   }
 
   render() {
