@@ -10,7 +10,7 @@ function App() {
     <Router>
 
       <div className="App">
-        Burning Airlines Coming Soon
+        Burning Airlines
       </div>
 
       <Switch>
