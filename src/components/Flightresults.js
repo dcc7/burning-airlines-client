@@ -1,25 +1,42 @@
 // Global stuff
 import React, { Component } from 'react';
 
-// File stuff
+class Flightresults extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      flightId: 0
+    };
+    this.handleClick = this._handleClick.bind(this);
+  }
 
+  _handleClick = (event) => {
+    this.setState({flightId: event.target.innerText})
+  }
 
-function Flightresults(props) {
-
-  let flights = props.flights.map((flight) => {
-    return flight.origin
-  })
-
-  return (
-    <div>
-      {flights}
-    </div>
-  )
-
+  render() {
+    return (
+          <div>
+            <table>
+             <tr>
+               <td>Departure date</td>
+               <td>Flight number</td>
+               <td>Origin</td>
+               <td>destination</td>
+             </tr>
+            {this.props.flights.map((flight) => 
+              <tr>
+               <td>{flight.departure_date}</td>
+               <td onClick={ this._handleClick }>{flight.id}</td>
+               <td>{flight.origin}</td>
+               <td>{flight.destination}</td>
+             </tr>
+            )}
+            </table>
+          </div>
+        )
+    };
 }
-
-
-
 
 export default Flightresults
