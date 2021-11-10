@@ -10,7 +10,9 @@ class Search extends Component {
   constructor() {
     super();
     this.state = {
-      flights: []
+      flights: [],
+      origin: '',
+      destination: ''
     };
   }
 
@@ -22,12 +24,17 @@ class Search extends Component {
   //   });
   // }
 
+  // Function to take in data from the child.
+  const saveFlights = (origin, destination) => {
+    // update the state with user input for origin and destination.
+  };
+
   render() {
     return (
       // passing down the flight data to the Searchflights child.
       <div>
         <h1>Search Flights</h1>
-        <Searchflights />
+        <Searchflights onSubmit={ this.saveFlights } />
         <Flightresults flights={this.state.flights}/>
       </div>
     );
