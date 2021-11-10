@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 // File stuff. More stuff.
 import Searchflights from "../components/Searchflights"
 import Flightresults from "../components/Flightresults"
+import axios from 'axios'
 
 class Search extends Component {
 
@@ -11,9 +12,8 @@ class Search extends Component {
     super();
     this.state = {
       flights: [],
-      origin: '',
-      destination: ''
     };
+    this.saveFlights = this.saveFlights.bind(this)
   }
 
   // const SERVER_URL = '';
@@ -26,8 +26,15 @@ class Search extends Component {
 
   // Function to take in data from the child.
   saveFlights(origin, destination) {
-    console.log(origin, destination); //this somehow works now Jonny. Good luck!
->>>>>>> 1fb29ed7803cf3ee1d848bcde310136075d5636f
+    axios('https://burning-airlines-oh-no.herokuapp.com/flights.json').then((response) => {
+      const matches = [];
+      response.data.forEach(flight => {
+        if(flight.origin === origin && flight.destination === destination) {
+          matches.push(flight)
+        }      
+      })
+      this.setState({flights: [...this.state.flights, ...matches]})
+    })
   };
 
   render() {

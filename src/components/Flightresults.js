@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 function Flightresults(props) {
 
   let flights = props.flights.map((flight) => {
-    return flight
+    return flight.origin
   })
 
   return (
