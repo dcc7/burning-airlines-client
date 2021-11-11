@@ -36,12 +36,10 @@ componentDidMount() {
   const checkState = (rows, cols) => {
       rowsArray(rows)
       colsArray(cols)
-      if(this.state.rows.length<1 || this.state.columns.length<1) {
-      setTimeout(checkState(this.props.seatrows, this.props.seatcolumns), 10000);
-    }
- };
+  };
 
-  checkState(this.props.seatrows, this.props.seatcolumns) 
+  setInterval(function() {console.log('hello')}, 5000)
+  setInterval(checkState(this.props.seatrows, this.props.seatcolumns), 5000)
 }
 
   render() {
